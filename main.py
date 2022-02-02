@@ -4,6 +4,7 @@ import math
 from random import randint, random
 import time
 import pygame
+from sqlalchemy import false
 
 
 
@@ -53,6 +54,10 @@ def game(true,showtext):
     urllib.request.urlretrieve(
     'https://programmingwithaditya.000webhostapp.com/snake.png',
     "snake.png")
+
+    urllib.request.urlretrieve(
+    'https://programmingwithaditya.000webhostapp.com/font.otf',
+    "font.otf")
     
 
     
@@ -73,7 +78,9 @@ def game(true,showtext):
     while splashScreenTimer < 1.8 and true:
         for event in pygame.event.get():
             if (event.type == pygame.QUIT):
-                pygame.quit()
+                splashScreenTimer = 1.8
+                exit_game = False
+                home_screen = False
             dt = clock.tick(60) / 1000
             splashScreenTimer += dt 
             window.fill((100,150,250))
@@ -89,7 +96,8 @@ def game(true,showtext):
         clock.tick(60)/ 100
         for event in pygame.event.get():
             if (event.type == pygame.QUIT):
-                pygame.quit()
+                home_screen = False
+                exit_game = True
             window.fill((100,205,80))
             font = pygame.font.Font("font.otf",30)
             text = font.render("SPACE TO START",True,(0, 0, 0))
